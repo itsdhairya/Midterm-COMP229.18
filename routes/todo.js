@@ -22,16 +22,16 @@ router.get('/list', todoController.todoList);
 router.get('/details/:id', todoController.details);
 
 // Routers for edit
-router.get('/edit/:id', requireAuth, todoController.add_edit);
-router.post('/edit/:id', requireAuth, todoController.add_edit);
+router.get('/add_edit/:id', requireAuth, todoController.displayEditPage);
+router.post('/add_edit/:id', requireAuth, todoController.processEditPage);
 
 // Delete
-router.get('/delete/:id', requireAuth, todoController.add_edit);
+router.get('/add_edit/:id', requireAuth, todoController.performDelete);
 
 /* GET Route for displaying the Add page - CREATE Operation */
-router.get('/add', requireAuth,todoController.add_edit);
+router.get('/add_edit', requireAuth,todoController.displayAddPage);
 
 /* POST Route for processing the Add page - CREATE Operation */
-router.post('/add', requireAuth, todoController.add_edit);
+router.post('/add_edit', requireAuth, todoController.processAddPage);
 
 module.exports = router;
