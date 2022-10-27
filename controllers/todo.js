@@ -58,7 +58,7 @@ module.exports.displayEditPage = (req, res, next) => {
             });
         }
     });
-
+}
 // Processes the data submitted from the Edit form to update a todo
 module.exports.processEditPage = (req, res, next) => {
 
@@ -138,5 +138,4 @@ module.exports.processAddPage = (req, res, next) => {
     });
     // ADD YOUR CODE HERE
     
-}
 }
