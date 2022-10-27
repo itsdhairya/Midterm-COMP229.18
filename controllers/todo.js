@@ -1,4 +1,5 @@
 // create a reference to the model
+const todo = require('../models/todo');
 let TodoModel = require('../models/todo');
 
 // Gets all todo from the Database and renders the page to list them all.
@@ -43,14 +44,20 @@ module.exports.details = (req, res, next) => {
 
 // Gets a todo by id and renders the Edit form using the add_edit.ejs template
 module.exports.displayEditPage = (req, res, next) => {
-    let newItem = todomodel();
+    let id  = TodoModel();
     // ADD YOUR CODE HERE
  
-    res.render('todo/add_edit', {
-    title: 'Add a New To Do Task',
-    car: newItem,
-    userName: req.user ? req.user.username : ''
-});
+    TodoModel.findById(id, (err, itemToEdit) => {
+        if(err) {
+            res.end(err);
+        }
+        else {
+            res.render('todo/add_edit', {
+                title: "Edit task",
+                task: itemToEdit,
+            });
+        }
+    });
 
 // Processes the data submitted from the Edit form to update a todo
 module.exports.processEditPage = (req, res, next) => {
@@ -96,12 +103,15 @@ module.exports.performDelete = (req, res, next) => {
 // Renders the Add form using the add_edit.ejs template
 module.exports.displayAddPage = (req, res, next) => {
 
-    // ADD YOUR CODE HERE     
+    let newItem = TodoModel();
+
+    // ADD YOUR CODE HERE        
+
     res.render('todo/add_edit', {
-        title: 'Add a New Task',
-        _id: req.body.id,
+        title: 'Add a New task',
+        id: req.body.id,
         task: req.body.task
-    });     
+    });
 
 }
 
